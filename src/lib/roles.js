@@ -27,3 +27,8 @@ export function roleLabels(roles, module) {
 export function siteIds(roles, module) {
   return [...new Set((roles || []).filter((r) => r.module === module).map((r) => r.site_id))];
 }
+
+// Roles held at one site (the browser only decides what to show; the database decides what is allowed).
+export function hasAnyAt(roles, module, site, wanted) {
+  return (roles || []).some((r) => r.module === module && r.site_id === site && wanted.includes(r.role));
+}
