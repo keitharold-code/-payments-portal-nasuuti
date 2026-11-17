@@ -9,13 +9,13 @@ async function loadAccess(session) {
   setState({ ready: false, loadError: null });
   try {
     const uid = session.user.id;
-    const [p, r] = await Promise.all([
-      supabase.from("profiles").select("id, full_name, is_active").eq("id", uid).maybeSingle(),
-      supabase.schema("core").from("user_roles").select("module, role, site_id")
-        .eq("user_id", uid).eq("active", true).is("deleted_at", null),
-    ]);
-    if (p.error) throw p.error;
+    // Payments never reads the sales portal's profiles table. Name comes from auth metadata;
+    // access (and deactivation) comes from core.user_roles.
+    const r = await supabase.schema("core").from("user_roles").select("module, role, site_id")
+      .eq("user_id", uid).eq("active", true).is("deleted_at", null);
     if (r.error) throw r.error;
+    const meta = session.user.user_metadata || {};
+    const profile = { id: uid, full_name: meta.full_name || session.user.email || session.user.phone || "" };
     const roles = r.data || [];
     let sites = [];
     if (roles.length) {
@@ -24,7 +24,7 @@ async function loadAccess(session) {
       if (s.error) throw s.error;
       sites = s.data || [];
     }
-    setState({ profile: p.data, roles, sites, siteId: sites[0]?.id ?? null, ready: true });
+    setState({ profile, roles, sites, siteId: sites[0]?.id ?? null, ready: true });
   } catch (e) {
     setState({ profile: null, roles: [], sites: [], ready: true, loadError: e.message || String(e) });
   }

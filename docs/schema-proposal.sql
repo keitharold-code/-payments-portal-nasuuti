@@ -1,3 +1,4 @@
+-- SUPERSEDED: the applied schema lives in supabase/migrations/. Kept for the design discussion only.
 -- =====================================================================
 -- Shell Nasuuti Payments Portal — DRAFT SCHEMA FOR APPROVAL (not a migration yet)
 -- Postgres 16 / Supabase. Money = bigint UGX. Timestamps = timestamptz (UTC).

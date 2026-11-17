@@ -23,11 +23,6 @@ function render() {
     root.querySelector("#so").addEventListener("click", signOut);
     return;
   }
-  if (s.profile && s.profile.is_active === false) {
-    root.innerHTML = '<div class="loginwrap"><div class="loginbox"><h1>Account deactivated</h1><p class="sub">Contact Keith.</p><button class="btn" id="so">Sign out</button></div></div>';
-    root.querySelector("#so").addEventListener("click", signOut);
-    return;
-  }
   mountApp(root);
 }
 

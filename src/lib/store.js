@@ -1,7 +1,7 @@
 // Minimal pub-sub store — same pattern as the Daily Sales portal.
 const state = {
   session: null,
-  profile: null, // { id, full_name, is_active } from public.profiles (shared with the sales portal)
+  profile: null, // { id, full_name } from auth user_metadata
   roles: [],     // [{ module, role, site_id }] from core.user_roles
   sites: [],     // [{ id, code, name }]
   siteId: null,  // active site
