@@ -51,18 +51,9 @@ create table core.user_roles (
 );
 create index on core.user_roles (user_id) where active and deleted_at is null;
 
--- Profile (name, phone, last_login). Use the existing profiles table if there is one.
-create table core.profiles (
-  user_id uuid primary key references auth.users(id),
-  name text not null,
-  phone text unique,
-  email text,
-  active boolean not null default true,
-  last_login timestamptz,
-  created_at timestamptz not null default now(),
-  updated_at timestamptz not null default now(),
-  created_by uuid, deleted_at timestamptz, deleted_by uuid
-);
+-- Profiles: REUSE public.profiles (id, full_name, role, is_active) from the sales portal.
+-- Confirmed by reading that repo. Payments never touches profiles.role (sales-only column).
+-- Phone lives in auth.users.phone. No core.profiles table is created.
 
 create table core.departments (
   id uuid primary key default gen_random_uuid(),

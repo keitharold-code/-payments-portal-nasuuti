@@ -114,3 +114,11 @@ Tests:
 - **Scans are the weak control.** The system proves a scan exists, not that it is the right paper. A hash check for the same image reused on two payments is in the schema (`files.sha256`); a human still compares the scan to the entry.
 - **Admin is a single point of trust.** Keith can verify and reopen. Every reopen is logged with a reason and appears in the weekly review; I suggest the Auditor sees them first.
 - **Supabase plan** (item 9 above) decides whether "daily backups" is a promise or a hope.
+
+---
+
+## 7. Update after reading the existing portal (Phase 1, step 1)
+
+- Existing portal uses `public.profiles(id, full_name, role in admin|entry|viewer, is_active)`. Payments **reuses it**; `core.profiles` is dropped. Outside `payments` we create only `core.sites`, `core.user_roles`, `core.departments`.
+- **Risk to fix before creating payments users:** the sales portal has a trigger on `auth.users` that gives every new user the sales role `entry`. Creating a payments-only user (e.g. the Auditor) would silently give them write access to sales data. Proposed fix (needs Keith's OK, touches the sales project): change the trigger default to `viewer`, or skip it when `raw_user_meta_data->>'module' = 'payments'`.
+- Supabase dashboard: add `core` and `payments` to **Settings → API → Exposed schemas** so the browser client can call them (RLS still applies).
