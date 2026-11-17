@@ -7,10 +7,12 @@ import { renderLauncher } from "./pages/launcher.js";
 import { renderHome } from "./pages/home.js";
 import { renderSuppliers } from "./pages/suppliers.js";
 import { renderBooks } from "./pages/books.js";
+import { renderCapture } from "./pages/capture.js";
 
 // Each module registers its own routes. Roles are payments roles; omit `roles` = any signed-in user.
 register({ path: "/launcher", render: renderLauncher });
 register({ path: "/payments/home", title: "Home", nav: true, payments: true, render: renderHome });
+register({ path: "/payments/capture", title: "Capture", nav: true, payments: true, roles: ["cashier"], render: renderCapture });
 register({ path: "/payments/suppliers", title: "Suppliers", nav: true, payments: true, render: renderSuppliers });
 register({ path: "/payments/books", title: "Books", nav: true, payments: true, render: renderBooks });
 

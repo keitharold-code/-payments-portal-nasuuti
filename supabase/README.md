@@ -10,7 +10,7 @@ apply them with the **SQL Editor** (paste each file, in filename order) or `psql
 Do not run `supabase db push` from this repo.
 
 Order: `20261117100000_core` -> `..100100_payments_tables` -> `..100200_payments_guards`
--> `..100300_rls_grants` -> `..100400_storage` -> `..100500_seed_nas` -> `..100600_rpc_suppliers_books`.
+-> `..100300_rls_grants` -> `..100400_storage` -> `..100500_seed_nas` -> `..100600_rpc_suppliers_books` -> `..100650_fix_audit_settings` -> `..100700_files_and_capture`.
 
 Before creating any payments user, apply `docs/sales-portal-fix/0006_new_users_not_sales_entry.sql`
 in the sales project (see its header), and turn off "Allow new users to sign up".

@@ -58,3 +58,8 @@ dialog.sheet::backdrop{background:rgba(10,24,30,.55)}
 .inline-err{color:var(--signal);font-size:13px;margin:0}
 .inline-warn{color:#7a5b00;font-size:13px;margin:0}
 @media (prefers-color-scheme: dark){.inline-warn{color:#E9CF76}}
+.btn{display:inline-block;text-align:center}
+label.btn.yellow{background:var(--canopy);border-color:var(--canopy);color:#1d1a0c}
+label.btn{appearance:none;border:1px solid var(--line);background:var(--card);color:var(--ink);font:600 15px "Barlow",sans-serif;padding:11px 18px;border-radius:7px}
+.form-grid section.block{margin:0}
+.form-grid select option:disabled{color:var(--muted)}

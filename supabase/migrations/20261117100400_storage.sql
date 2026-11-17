@@ -1,6 +1,6 @@
--- Private bucket for scans and receipts. No storage.objects policies on purpose:
--- uploads and downloads happen only through signed URLs issued by an Edge Function
--- after a role check (built with the capture screen).
+-- Private bucket for scans and receipts. Access rules (who may upload / read which site's folder)
+-- are storage.objects policies in 20261117100700_files_and_capture.sql. Files are only ever
+-- opened through short-lived signed URLs.
 do $$
 begin
   if to_regclass('storage.buckets') is not null then
